@@ -1,5 +1,7 @@
 # doctor
 
+## 运行的时候需要按照VSCode扩展Vue - Official，这样在引入组件的时候就不会编译报错了
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
