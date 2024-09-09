@@ -1,88 +1,60 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import { Button } from 'ant-design-vue'
-</script>
-
 <template>
-    <header>
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-        <div class="wrapper">
-            <Button type="primary">是你的就是你的那你</Button>
-            <HelloWorld msg="You did it!" />
-
-            <nav>
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/about">About</RouterLink>
-                <RouterLink to="/userCenter">用户中心</RouterLink>
-            </nav>
-        </div>
-    </header>
-
-    <RouterView />
+    <a-layout class="main-wrap">
+        <a-layout-header class="header">
+            <div class="logo" />
+            <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
+                <a-menu-item v-for="(menu) in menuList" :key="menu.key">{{ menu.title }}</a-menu-item>
+            </a-menu>
+        </a-layout-header>
+        <a-layout style="padding: 12px">
+            <a-layout-content :style="{ background: '#fff', padding: '16px', margin: 0, minHeight: '280px' }">
+                <RouterView />
+            </a-layout-content>
+        </a-layout>
+    </a-layout>
 </template>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { RouterView } from 'vue-router'
+const selectedKeys = ref<string[]>(['1']);
 
+interface MenuItem {
+    title: string,
+    key: string
+}
+
+const menuList = ref<MenuItem[]>([
+    {
+        title: '用户管理',
+        key: '1'
+    },
+    // {
+    //     title: '用户',
+    //     key: '2'
+    // },
+])
+</script>
 <style scoped>
-header {
-    line-height: 1.5;
-    max-height: 100vh;
-}
-
-.logo {
-    display: block;
-    margin: 0 auto 2rem;
-}
-
-nav {
+.main-wrap {
     width: 100%;
-    font-size: 12px;
-    text-align: center;
-    margin-top: 2rem;
+    height: 100%;
 }
 
-nav a.router-link-exact-active {
-    color: var(--color-text);
+#components-layout-demo-top-side-2 .logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: rgba(255, 255, 255, 0.3);
 }
 
-nav a.router-link-exact-active:hover {
-    background-color: transparent;
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
 }
 
-nav a {
-    display: inline-block;
-    padding: 0 1rem;
-    border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-    border: 0;
-}
-
-@media (min-width: 1024px) {
-    header {
-        display: flex;
-        place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
-    }
-
-    .logo {
-        margin: 0 2rem 0 0;
-    }
-
-    header .wrapper {
-        display: flex;
-        place-items: flex-start;
-        flex-wrap: wrap;
-    }
-
-    nav {
-        text-align: left;
-        margin-left: -1rem;
-        font-size: 1rem;
-
-        padding: 1rem 0;
-        margin-top: 1rem;
-    }
+.site-layout-background {
+    background: #fff;
 }
 </style>
+  

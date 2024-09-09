@@ -2,6 +2,15 @@
 
 ## 运行的时候需要按照VSCode扩展Vue - Official，这样在引入组件的时候就不会编译报错了
 
+## 在env.d.ts添加一下代码
+```js
+declare module '*.vue' {
+    import type { DefineComponent } from 'vue'
+    const component: DefineComponent<{}, {}, any>
+    export default component
+}
+```
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
