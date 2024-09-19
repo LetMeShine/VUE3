@@ -22,4 +22,5 @@ class Result {
         return new Result(500, "数据库错误", null);
     }
 }
-module.exports = Result;
+
+export default Result

@@ -1,8 +1,9 @@
-const UserDao = require("../dao/UserDao");
-
+import UserDao from '../dao/UserDao.js'
 class UserService {
     async getUserList() {
         return await UserDao.getUserList();
     }
 }
-module.exports = new UserService();
+const userInstance = new UserService();
+
+export default userInstance;

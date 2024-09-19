@@ -1,6 +1,18 @@
+import db from '../models/index.js';
+import { Op } from "sequelize";
+
 class UserDao {
     async getUserList() {
-        return "Dao UserList";
+        console.log("==========")
+        const userInfo = await db.Users.findAll({
+            where: {
+                name: {
+                    [Op.not]: null
+                }
+            }
+        })
+        return userInfo;
     }
 }
-module.exports = new UserDao();
+const userDaoInstance = new UserDao()
+export default userDaoInstance
