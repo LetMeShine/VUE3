@@ -6,7 +6,7 @@
                 enter-button />
         </div>
         <div class="list-wrap">
-            <a-table :columns="columns" :data-source="data">
+            <a-table :columns="columns" :data-source="dataList">
                 <template #bodyCell="{ column, record }">
                     <template v-if="column.key === 'tags'">
                         <span>
@@ -63,9 +63,21 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onBeforeMount, reactive } from 'vue';
 import { columns } from './ts/columns'
 import type { TableProps } from 'ant-design-vue/lib/table/Table'
+
+import { getUserList } from '@/API/index.ts'
+
+interface FormState {
+    username?: string | undefined;
+    password?: string | undefined;
+    name?: string | undefined;
+    birth?: string | undefined;
+    address?: string | undefined;
+    tel?: string | undefined;
+}
+
 const keyword = ref<string>('');
 const loading = ref<Boolean>(false);
 const open = ref<boolean>(false);
@@ -74,32 +86,7 @@ const title = computed(() => {
     return isAdd.value ? '新增' : '编辑'
 })
 
-const data: TableProps["dataSource"] = [
-    {
-        key: 'username',
-        name: 'zs',
-        age: 32,
-        username: 'za',
-        address: 'New York No. 1 Lake Park',
-        tel: 123,
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        username: 'za',
-        address: 'London No. 1 Lake Park',
-        tel: 123,
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        username: 'za',
-        address: 'Sidney No. 1 Lake Park',
-        tel: 123,
-    },
-];
+const dataList = ref<TableProps["dataSource"]>([]);
 
 const showModal = () => {
     isAdd.value = true;
@@ -114,17 +101,6 @@ const editUser = () => {
     open.value = true;
 }
 
-import { reactive } from 'vue';
-
-interface FormState {
-    username: string | undefined;
-    password: string | undefined;
-    name?: string | undefined;
-    birth?: string | undefined;
-    address?: string | undefined;
-    tel?: string | undefined;
-}
-
 const formState = reactive({} as FormState);
 const onFinish = (values: any) => {
     console.log('Success:', values);
@@ -133,6 +109,13 @@ const onFinish = (values: any) => {
 const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
 };
+
+onBeforeMount(() => {
+    getUserList().then(({ data }) => {
+        console.log(data, 55555)
+        dataList.value = data.data
+    })
+})
 
 </script>
 <style scoped>
