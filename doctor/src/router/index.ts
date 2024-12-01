@@ -22,6 +22,11 @@ const router = createRouter({
             name: 'userCenter',
             component: () => import('../views/userCenter/index.vue')
         },
+        {
+            path: '/medicinalMaterials',
+            name: 'medicinalMaterials',
+            component: () => import('../views/medicinalMaterials/index.vue')
+        },
     ]
 })
 

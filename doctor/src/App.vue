@@ -42,10 +42,11 @@ const menuList = ref<MenuItem[]>([
         key: '1',
         path: '/userCenter'
     },
-    // {
-    //     title: '用户',
-    //     key: '2'
-    // },
+    {
+        title: '药材管理',
+        key: '2',
+        path: '/medicinalMaterials',
+    },
 ])
 
 const clickMenu = (menu: MenuItem) => {
