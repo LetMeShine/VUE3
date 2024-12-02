@@ -1,6 +1,7 @@
 <template>
     <div class="materials-wrap">
-        <a-row :gutter="16">
+        <Condition />
+        <a-row class="content" :gutter="16">
             <a-col :span="8">
                 <!-- 药材图片是读取数据库的 TODO -->
                 <a-card hoverable style="width: 300px">
@@ -35,6 +36,7 @@
 import { SettingOutlined, EditOutlined, EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { ref, computed, onBeforeMount, reactive, h } from 'vue';
 import { Modal, message } from 'ant-design-vue';
+import Condition from './condition.vue'
 
 const [modal, contextHolder] = Modal.useModal();
 
@@ -76,7 +78,13 @@ onBeforeMount(() => {
 })
 
 </script>
-<style scoped>
+<style scoped lang="less">
+.materials-wrap {
+    .content {
+        margin: 12px;
+    }
+}
+
 :deep(.ant-card-cover) {
     padding: 4px;
     border-bottom: 1px solid #f0f0f0;

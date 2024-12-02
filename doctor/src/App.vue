@@ -13,7 +13,7 @@
                 </a-menu>
             </a-layout-header>
             <a-layout style="padding: 12px">
-                <a-layout-content :style="{ background: '#fff', padding: '16px', margin: 0, minHeight: '280px' }">
+                <a-layout-content :style="{ background: '#fff', margin: 0, minHeight: '280px' }">
                     <RouterView />
                 </a-layout-content>
             </a-layout>
