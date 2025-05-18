@@ -27,6 +27,11 @@ const router = createRouter({
             name: 'medicinalMaterials',
             component: () => import('../views/medicinalMaterials/index.vue')
         },
+        // {
+        //     path: '/list',
+        //     name: 'list',
+        //     component: () => import('../components/list.vue')
+        // }
     ]
 })
 

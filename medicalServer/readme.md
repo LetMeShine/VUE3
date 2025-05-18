@@ -78,18 +78,26 @@ created_at: {
 11. 要想让数据的创建时间是自动生成的，需要再models的User模型给创建时间设置默认值
 `defaultValue: sequelize.literal('CURRENT_TIMESTAMP')` // 自动获取当前时间作为创建时间
 
-12. 要想让接受的请求参数post需要安装插件`npm install body-parser`
+12. 要想让接受的请求参数post需要安装插件`npm install body-parser`,但是4.16.0以上不需要安装。
 /:id 是动态路由，id是变量，可以通过req.params.id获取
 ?test=66 是拼接路由，可以通过req.query.test获取
 ```js
-// import bodyParser from 'body-parser'
-// const  app = express();
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.json()); // 解析JSON格式的请求体 高版本直接使用
-// app.use(express.urlencoded({ extended: true })); // 解析URL编码格式的请求体
+// 路由汇总
 
-// 这些不生效
+// 负责所有路由的导入
+import express from 'express'
+import UserController from './UserController.js'
+const router = express.Router();
+
+// 一定要在 router.use才生效，很多例子是写在app.use，导致一直不生效，然后一直获取不到req.body
+// 解析application/json
+router.use(express.json());
+
+// 解析application/x-www-form-urlencoded
+router.use(express.urlencoded({ extended: true }))
+
+router.use("/medical", UserController);
+export default router
 
 ```
 

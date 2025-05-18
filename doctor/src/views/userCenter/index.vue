@@ -30,8 +30,8 @@
         </div>
 
         <a-modal v-model:open="open" :title="title">
-            <a-form :model="formState" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }" autocomplete="off"
-                @finish="onFinish" @finishFailed="onFinishFailed">
+            <a-form :model="formState" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }"
+                autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
                 <a-form-item label="用户名" name="username" :rules="[{ required: true, message: '请输入用户名' }]">
                     <a-input :disabled="!isAdd" placeholder="请输入用户名" v-model:value="formState.username" />
                 </a-form-item>
@@ -67,7 +67,7 @@ import { ref, computed, onBeforeMount, reactive } from 'vue';
 import { columns } from './ts/columns'
 import type { TableProps } from 'ant-design-vue/lib/table/Table'
 
-import { getUserList } from '@/API/index.ts'
+import { getUserList, addUser } from '@/API/index.ts'
 
 interface FormState {
     username?: string | undefined;
@@ -94,6 +94,21 @@ const showModal = () => {
 };
 const hideModal = () => {
     open.value = false;
+    let param = {
+        userCode: Math.random() + '',
+        name: formState.name,
+        username: formState.username,
+        password: formState.password,
+        address: formState.address,
+        tel: formState.tel,
+        // birth
+    }
+    addUser(param).then(() => {
+        getUserList().then(({ data }) => {
+            console.log(data, 55555)
+            dataList.value = data.data
+        })
+    })
 };
 
 const editUser = () => {
@@ -130,4 +145,3 @@ onBeforeMount(() => {
     justify-content: space-between;
 }
 </style>
-  

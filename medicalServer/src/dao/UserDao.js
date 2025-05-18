@@ -13,6 +13,11 @@ class UserDao {
         })
         return userInfo;
     }
+    async addUser(param) {
+        console.log("==========", param)
+        const userInfo = await db.Users.create(param)
+        return userInfo;
+    }
 }
 const userDaoInstance = new UserDao()
 export default userDaoInstance

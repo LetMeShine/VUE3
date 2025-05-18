@@ -7,6 +7,7 @@ export default class Users extends Model {
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                autoIncrement: true, // 自增
                 primaryKey: true,
             },
             userCode: {
@@ -40,6 +41,7 @@ export default class Users extends Model {
             created_at: {
                 type: DataTypes.DATE,
                 allowNull: true,
+                defaultValue: sequelize.literal('CURRENT_TIMESTAMP') // 自动获取当前时间作为创建时间
             },
             update_at: {
                 type: DataTypes.DATE,
