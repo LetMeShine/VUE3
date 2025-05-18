@@ -1,11 +1,5 @@
 <template>
-    <div class="about">
-        <h1>This is an about page</h1>
-        <p>name:{{ name }}——type:{{ type }}——name*10:{{ name1 }}</p>
-        <p>{{ a }}---{{ c }}</p>
-        <p>x:{{ x }}</p>
-        <button @click="change()">按钮</button>
-    </div>
+    <div class="about">about</div>
 </template>
 <script lang="ts">
 // eslint-disable-next-line
