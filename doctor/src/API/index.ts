@@ -21,3 +21,19 @@ export function addUser(param) {
         data: param
     });
 }
+
+export function updateUser(param) {
+    return axios({
+        method: 'put',
+        url: 'http://localhost:3000/medical/user/update',
+        data: param
+    });
+}
+
+export function deletUser(id) {
+    return axios({
+        method: 'delete',
+        url: 'http://localhost:3000/medical/user/'+id,
+        // data: param
+    });
+}
