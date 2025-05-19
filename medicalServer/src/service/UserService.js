@@ -6,6 +6,12 @@ class UserService {
     async addUser(param) {
         return await UserDao.addUser(param);
     }
+    async updateUser(param) {
+        return await UserDao.updateUser(param);
+    }
+    async deleteUser(param) {
+        return await UserDao.deleteUser(param);
+    }
 }
 const userInstance = new UserService();
 
