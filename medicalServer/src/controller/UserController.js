@@ -14,4 +14,12 @@ UserControler.post("/user/add", async (req, res) => {
     res.send(Result.success(await UserService.addUser(req.body)));
 });
 
+UserControler.put("/user/update", async (req, res) => {
+    res.send(Result.success(await UserService.updateUser(req.body)));
+});
+
+UserControler.delete("/user/:id", async (req, res) => {
+    res.send(Result.success(await UserService.deleteUser(req.params.id)));
+});
+
 export default UserControler
