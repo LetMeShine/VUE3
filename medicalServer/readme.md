@@ -100,6 +100,43 @@ router.use("/medical", UserController);
 export default router
 
 ```
+<!-- 在模型开启时间戳，自动更新创建时间和更新时间 -->
+```js
+{
+    timestamps: true, // 自动开启时间戳
+    createdAt: 'created_at', // 自动获取当前时间作为创建时间,别名是created_at
+    updatedAt: 'update_at', // 自动获取当前时间作为更新时间，别名是update_at
+}
+```
+
+**生成图片后存储图片文件等**
+需要先新增对应的目录文件 `static/img`
+```js
+
+// 存储文件
+const base64Image = 'data:image/png;base64,iVBORw0KGgoAAAANS'; // 这里应该是你的Base64字符串
+const imageBuffer = Buffer.from(base64Image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// 置顶目录
+const staticPath = path.join(__dirname, '../static/img');
+
+// 保存Base64图片到文件系统
+const filePath = path.join(staticPath, 'uploadedImage.png');
+fs.writeFileSync(filePath, imageBuffer);
+
+console.log(staticPath,'__filename');
+
+// 设置静态文件服务，这样可以直接通过URL访问图片
+app.use('/static', express.static(staticPath));
+
+// 这样就可以通过 http://localhost:3000/static/uploadedImage.png 地址来访问图片了
+```
+
 
 13. 新增药材原理表
 + 药材图表多个
@@ -121,3 +158,4 @@ UI构思：
 症状描述文本框
 过敏史单选，补充文本框
 症状名字
+
