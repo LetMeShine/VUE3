@@ -51,7 +51,9 @@ export default class Users extends Model {
         }, {
             sequelize,
             tableName: "users",
-            timestamps: false,
+            timestamps: true, // 自动开启时间戳
+            createdAt: 'created_at', // 自动获取当前时间作为创建时间
+            updatedAt: 'update_at', // 自动获取当前时间作为更新时间
             indexes: [
                 {
                     name: "PRIMARY",
